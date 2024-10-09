@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title th:replace="::title">Default Title</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<!-- Header -->
+<header th:replace="::header">
+    <h1>My Application</h1>
+</header>
+
+<!-- Main Content -->
+<main>
+    <div th:replace="::content"></div> <!-- Đây là nơi sẽ nhúng nội dung con -->
+</main>
+
+<!-- Footer -->
+<footer th:replace="::footer">
+    <p>&copy; 2024 My Application</p>
+</footer>
+
+</body>
+</html>

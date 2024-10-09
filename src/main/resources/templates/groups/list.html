@@ -1,21 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master}">
+<head><head th:replace="layouts/master :: title">
+    <title>Home Page</title>
 </head>
-<body>
-<h2>Group list</h2>
-<a href="/groups/create">Create</a>
-<table>
-    <tr>
-        <td>#</td>
-        <td>Name</td>
-    </tr>
-    <tr th:each="group : ${groups}">
-        <td th:text="${group.id}"></td>
-        <td th:text="${group.name}"></td>
-    </tr>
-</table>
+<body th:replace="layouts/master :: content">
+
+<section>
+    <h2>Welcome to the Home Page</h2>
+    <p>This is the content of the home page.</p>
+</section>
+
 </body>
 </html>
