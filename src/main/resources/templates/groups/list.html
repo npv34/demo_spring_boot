@@ -1,21 +1,45 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/master}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>List Group</title>
 </head>
 <body>
-<h2>Group list</h2>
-<a href="/groups/create">Create</a>
-<table>
-    <tr>
-        <td>#</td>
-        <td>Name</td>
-    </tr>
-    <tr th:each="group : ${groups}">
-        <td th:text="${group.id}"></td>
-        <td th:text="${group.name}"></td>
-    </tr>
-</table>
+
+<!-- Chèn nội dung vào phần "content" của layout -->
+<div layout:fragment="content">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                List Group
+                <a th:href="@{/groups/create}" class="btn btn-success float-end" sec:authorize="hasRole('ROLE_ADMIN')">Create New Group</a>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="group, iterStat : ${groups}">
+                            <th scope="row" th:text="${iterStat.index + 1}"></th>
+                            <td th:text="${group.name}"></td>
+                            <td sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a href="#" class="btn btn-primary">Edit</a>
+                                <a href="#" class="btn btn-danger" >Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
