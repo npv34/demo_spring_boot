@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/master}">
-<head><head th:replace="layouts/master :: title">
-    <title>Home Page</title>
+<head>
+    <title>List Group</title>
 </head>
-<body th:replace="layouts/master :: content">
+<body>
 
-<section>
-    <h2>Welcome to the Home Page</h2>
-    <p>This is the content of the home page.</p>
-</section>
+<!-- Chèn nội dung vào phần "content" của layout -->
+<div layout:fragment="content">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                List Group
+                <a th:href="@{/groups/create}" class="btn btn-success float-end" sec:authorize="hasRole('ROLE_ADMIN')">Create New Group</a>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="group, iterStat : ${groups}">
+                            <th scope="row" th:text="${iterStat.index + 1}"></th>
+                            <td th:text="${group.name}"></td>
+                            <td sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a href="#" class="btn btn-primary">Edit</a>
+                                <a href="#" class="btn btn-danger" >Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
